@@ -1,24 +1,35 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Username:</strong>
-  <%= @user.username %>
+  <strong>
+    <%= @user.name %>
+  </strong>
 </p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
-
-<p>
-  <strong>Bio:</strong>
   <%= @user.bio %>
 </p>
 
+<% if logged_in? && @user == current_user %>
+  <%= link_to 'Edit', edit_user_path(@user) %> |
+  <td><%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<% end %>
+
+
 <p>
-  <strong>Password hash:</strong>
-  <%= @user.password_hash %>
+  <strong>Posts:</strong>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<table>
+  <tbody>
+    <% @user.posts.each do |post| %>
+      <tr>
+        <td><%= post.caption %></td>
+        <% if logged_in? && @user == current_user %>
+          <td><%= link_to 'Edit', "/posts/#{post.id}" %></td>
+          <td><%= link_to 'Destroy', "/posts/#{post.id}", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

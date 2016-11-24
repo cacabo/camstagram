@@ -7,8 +7,24 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <a href = "/"><header><strong>Camstagram</strong></header></a>
+  <nav class="nav-banner">
+    <a class="nav-btn" href="/users">Users</a>
+    <% if not logged_in? %>
+      <a class="nav-btn" href="/login">Log in</a>
+      <a class="nav-btn" href="/users/new">Sign up</a>
+    <% else %>
+      <%= link_to "@#{current_user.name}", current_user %>
+      <%= link_to 'Log out', logout_path, method: :delete %>
+    <% end %>
+    <span class="nav-sessions">
+    </span>
+  </nav>
 
-<%= yield %>
+  <%= yield %>
 
+  <footer>
+    <p>Created by Cameron Cabo</p>
+  </footer>
 </body>
 </html>
