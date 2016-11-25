@@ -7,13 +7,30 @@
 </p>
 
 <p>
-  <%= @user.bio %>
+  <%= @user.bio %><br>
+  <strong>Followers:</strong>
+  <%= @user.followers.count %><br>
+  <strong>Following:</strong>
+  <%= @user.following.count %>
 </p>
 
-<% if logged_in? && @user == current_user %>
-  <%= link_to 'New Post', 'posts#create' %>
-  <%= link_to 'Edit', edit_user_path(@user) %> |
-  <td><%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<% if logged_in?
+  <% if @user == current_user %>
+    <%= link_to 'New Post', 'posts#create' %>
+    <%= link_to 'Edit', edit_user_path(@user) %> |
+    <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% elsif @user != current_user %>
+    <% if current_user.following.contains(@user.id) %>
+    #
+    #
+    #
+    #
+    #
+    #
+      <%= link_to 'Unfollow', @user %>
+    <% else %>
+      <%= link_to 'Follow', @user %>
+    <% end %>
 <% end %>
 
 
