@@ -11,6 +11,7 @@
 </p>
 
 <% if logged_in? && @user == current_user %>
+  <%= link_to 'New Post', 'posts#create' %>
   <%= link_to 'Edit', edit_user_path(@user) %> |
   <td><%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 <% end %>
