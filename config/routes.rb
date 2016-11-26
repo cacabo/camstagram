@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   post '/users/:id/follow_user' => 'follows#follow_user'
   post '/users/:id/unfollow_user' => 'follows#unfollow_user'
+  get '/users/:id/followers' => 'follows#followers'
+  get '/users/:id/following' => 'follows#following'
 
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'

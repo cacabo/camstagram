@@ -7,10 +7,8 @@
   <%= @user.bio %><br>
   <strong>Posts:</strong>
   <%= @user.posts.count %><br>
-  <strong>Followers:</strong>
-  <%= @user.followers.count %><br>
-  <strong>Following:</strong>
-  <%= @user.following.count %>
+  <%= link_to "Followers: #{@user.followers.count}", "/users/#{@user.id}/followers" %><br>
+  <%= link_to "Following: #{@user.following.count}", "/users/#{@user.id}/following" %>
 </p>
 
 <% if logged_in? %>

@@ -1,0 +1,22 @@
+<h1>Following</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Name</th>
+      <th>Bio</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @followings.each do |following| %>
+      <tr>
+        <td><%= following.username %></td>
+        <td><%= following.name %></td>
+        <td><%= following.bio %></td>
+        <td><%= link_to 'Show', following %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

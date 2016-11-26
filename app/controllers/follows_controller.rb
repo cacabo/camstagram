@@ -1,6 +1,7 @@
 class FollowsController < ApplicationController
+  before_action :set_user
+
   def follow_user
-    @user = User.find(params[:id])
     if current_user.follow @user.id
       respond_to do |format|
         format.html { redirect_to root_path }
@@ -10,7 +11,6 @@ class FollowsController < ApplicationController
   end
 
   def unfollow_user
-    @user = User.find(params[:id])
     if current_user.unfollow @user.id
       respond_to do |format|
         format.html { redirect_to root_path }
@@ -18,4 +18,18 @@ class FollowsController < ApplicationController
       end
     end
   end
+
+  def followers
+    @followers = @user.followers
+  end
+
+  def following
+    @followings = @user.following
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_user
+      @user = User.find(params[:id])
+    end
 end
