@@ -4,9 +4,6 @@
   <strong>
     <%= @user.name %>
   </strong>
-</p>
-
-<p>
   <%= @user.bio %><br>
   <strong>Posts:</strong>
   <%= @user.posts.count %><br>
@@ -21,12 +18,10 @@
     <%= link_to 'New Post', '/posts/new' %>
     <%= link_to 'Edit', edit_user_path(@user) %> |
     <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
-  <% elsif @user != current_user %>
-    <% if current_user_is_following(current_user.id, @user.id) %>
-      <%= link_to 'Following', unfollow_user_path, method: :post %>
-    <% else %>
-      <%= link_to 'Follow', follow_user_path, method: :post %>
-    <% end %>
+  <% elsif current_user_is_following(current_user.id, @user.id) %>
+    <%= link_to 'Following', "follows#unfollow_user(#{@user.username})" %>
+  <% else %>
+    <%= link_to 'Follow', "follows#follow_user(#{@user.username})" %>
   <% end %>
 <% end %>
 
