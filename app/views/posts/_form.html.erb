@@ -1,21 +1,26 @@
-<%= form_for(@post) do |f| %>
-  <% if @post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+<% if logged_in? %>
+  <%= form_for(@post) do |f| %>
+    <% if @post.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
-      <ul>
-      <% @post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    
+    <div class="field">
+      <%= f.label :caption %><br>
+      <%= f.text_field :caption %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
     </div>
   <% end %>
-  
-  <div class="field">
-    <%= f.label :caption %><br>
-    <%= f.text_field :caption %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+<% else %>
+  <p>You must be signed in to write a post.</p>
 <% end %>

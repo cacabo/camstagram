@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
-  resources :users
-  resources :posts
-
-  root 'posts#index'
+  post ':username/follow_user' => 'follows#follow_user'
+  post ':username/unfollow_user' => 'follows#unfollow_user'
 
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'
+
+  root 'posts#index'
+
+  resources :users
+  resources :posts
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

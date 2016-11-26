@@ -8,29 +8,26 @@
 
 <p>
   <%= @user.bio %><br>
+  <strong>Posts:</strong>
+  <%= @user.posts.count %><br>
   <strong>Followers:</strong>
   <%= @user.followers.count %><br>
   <strong>Following:</strong>
   <%= @user.following.count %>
 </p>
 
-<% if logged_in?
+<% if logged_in? %>
   <% if @user == current_user %>
-    <%= link_to 'New Post', 'posts#create' %>
+    <%= link_to 'New Post', '/posts/new' %>
     <%= link_to 'Edit', edit_user_path(@user) %> |
     <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
   <% elsif @user != current_user %>
-    <% if current_user.following.contains(@user.id) %>
-    #
-    #
-    #
-    #
-    #
-    #
-      <%= link_to 'Unfollow', @user %>
+    <% if current_user_is_following(current_user.id, @user.id) %>
+      <%= link_to 'Following', unfollow_user_path, method: :post %>
     <% else %>
-      <%= link_to 'Follow', @user %>
+      <%= link_to 'Follow', follow_user_path, method: :post %>
     <% end %>
+  <% end %>
 <% end %>
 
 
@@ -40,7 +37,8 @@
 
 <table>
   <tbody>
-    <% @user.posts.each do |post| %>
+    <% sorted_posts = @user.posts.reverse %>
+    <% sorted_posts.each do |post| %>
       <tr>
         <td><%= post.caption %></td>
         <% if logged_in? && @user == current_user %>

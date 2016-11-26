@@ -5,21 +5,38 @@ class User < ActiveRecord::Base
   validates :name, length: { minimum: 1 }
   validates :username, presence: true
   validates :username, uniqueness: true
-  validates :username, length: { minimum: 3 }
-  has_many :followers, class_name: 'Following', foreign_key: 'user_id', dependent: :destroy
-  has_many :following, class_name: 'Following', foreign_key: 'follower_id', dependent: :destroy
+  validates :username, length: { minimum: 2 }
+
+  #has_many :followers, class_name: 'Following', foreign_key: 'user_id', dependent: :destroy
+  #has_many :following, class_name: 'Following', foreign_key: 'follower_id', dependent: :destroy
+
+  has_many :follower_relationships, foreign_key: :following_id, class_name: 'Follow', dependent: :destroy
+  has_many :followers, through: :follower_relationships, source: :follower
+
+  has_many :following_relationships, foreign_key: :follower_id, class_name: 'Follow', dependent: :destroy
+  has_many :following, through: :following_relationships, source: :following
+  
+
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
 
   include BCrypt
 
-  def add_follower(follower_id)
-    this.followers << follower_id
+  def follow(user_id)
+    following_relationships.create(following_id: user_id)
   end
 
-  def add_following(following_id)
-    this.following << following_id
+  def unfollow(user_id)
+    following_relationships.find_by(following_id: user_id).destroy
   end
+
+  #def add_follower(follower_id)
+  #  this.followers << follower_id
+  #end
+
+  #def add_following(following_id)
+  #  this.following << following_id
+  #end
 
   #def remove_follower(follower_id)
   #  this.followers.delete(follower_id)
@@ -54,8 +71,4 @@ class User < ActiveRecord::Base
     @password = Password.create(new_password)
     self.password_hash = @password
   end
-
-  private
-
-
 end
