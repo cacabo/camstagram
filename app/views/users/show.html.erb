@@ -19,9 +19,9 @@
     <%= link_to 'Edit', edit_user_path(@user) %> |
     <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
   <% elsif current_user_is_following(current_user.id, @user.id) %>
-    <%= link_to 'Following', "follows#unfollow_user(#{@user.username})" %>
+    <%= link_to 'Following', "/users/#{@user.id}/unfollow_user", method: :post %>
   <% else %>
-    <%= link_to 'Follow', "follows#follow_user(#{@user.username})" %>
+    <%= link_to 'Follow', "/users/#{@user.id}/follow_user", method: :post %>
   <% end %>
 <% end %>
 
