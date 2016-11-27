@@ -1,17 +1,27 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Caption:</strong>
-  <%= @post.caption %>
+  <strong>User:</strong>
+  <%= @post.user.username %>
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @post.user.username %>
+  <strong>Caption:</strong>
+  <%= @post.caption %>
 </p>
 
 <% if logged_in? %>
   <%= link_to 'Edit', edit_post_path(@post) %> |
   <%= link_to 'Delete post', "/posts/#{@post.id}", method: :delete, data: { confirm: 'Are you sure?' } %> |
 <% end %>
+
+<p><strong>Comments:</strong></p>
+<% @post.comments.each do |comment| %>
+  <p><strong><%= comment.user.username %></strong> <%= comment.body %></p>
+<% end %>
+
+<% if logged_in? %>
+  <%= link_to 'Add a comment', "/posts/#{@post.id}/comments/new" %>
+<% end %>
+
 <%= link_to 'Back', posts_path %>
