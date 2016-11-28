@@ -1,12 +1,16 @@
 <p id="notice"><%= notice %></p>
 
+<%= image_tag @post.user.profile_picture.url(:thumb) %>
+
 <p>
   <strong>User:</strong>
   <%= @post.user.username %>
 </p>
 
+<%= image_tag @post.image.url(:large) %>
+
 <p>
-  <strong>Caption:</strong>
+  <strong><%=@post.user.username%></strong>
   <%= @post.caption %>
 </p>
 

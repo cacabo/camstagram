@@ -20,6 +20,13 @@ class User < ActiveRecord::Base
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+  has_attached_file :profile_picture, styles: {
+    thumb: '50x50#',
+    medium: '200x200#'
+  }
+
+  validates_attachment_content_type :profile_picture, content_type: /\Aimage\/.*\Z/
+
   include BCrypt
 
   def follow(user_id)
@@ -29,39 +36,6 @@ class User < ActiveRecord::Base
   def unfollow(user_id)
     following_relationships.find_by(following_id: user_id).destroy
   end
-
-  #def add_follower(follower_id)
-  #  this.followers << follower_id
-  #end
-
-  #def add_following(following_id)
-  #  this.following << following_id
-  #end
-
-  #def remove_follower(follower_id)
-  #  this.followers.delete(follower_id)
-  #end
-
-  #def remove_following(following_id)
-  #  this.following.delete(following_id)
-  #end
-
-  #def remove_follows
-  #  this.followers.each do |id|
-  #    this.remove_follower(id)
-  #  end
-  #  this.following.each do |id|
-  #    this.remove_following(id)
-  #  end
-  #end
-
-  #def followers_count
-  #  @user.followers.length
-  #end
-
-  #def following_count()
-  #  @user.following.length
-  #end
 
   def password
     @password ||= Password.new(password_hash) unless password_hash.nil?
