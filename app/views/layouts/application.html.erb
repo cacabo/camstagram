@@ -1,30 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Camstagram</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+    <title>Camstagram</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
 </head>
-<body>
-  <a href = "/"><header><strong>Camstagram</strong></header></a>
-  <nav class="nav-banner">
-    <a class="nav-btn" href="/users">Users</a>
-    <% if not logged_in? %>
-      <a class="nav-btn" href="/login">Log in</a>
-      <a class="nav-btn" href="/users/new">Sign up</a>
-    <% else %>
-      <%= link_to "@#{current_user.username}", current_user %>
-      <%= link_to 'Log out', logout_path, method: :delete %>
-    <% end %>
-    <span class="nav-sessions">
-    </span>
-  </nav>
+  <body>
+    <header>
+      <div class="row">
+        <div class="col-xs-4">
+          <a href = "/"><strong>Camstagram</strong></a>
+        </div>
+        <div class="col-xs-8">
+        <nav class="nav-banner">
+          <div class="col-xs-6">
+            <a class="nav-btn" href="/users">Users</a>
+          </div>
+          <div class="col-xs-6">
+            <% if not logged_in? %>
+              <div class ="col-xs-4">
+                <a class="nav-btn" href="/login">Log in</a>
+              </div>
+              <div class ="col-xs-4">
+                <a class="nav-btn" href="/users/new">Sign up</a>
+              </div>
+            <% else %>
+              <div class ="col-xs-4">
+                <%= link_to "@#{current_user.username}", current_user %>
+              </div>
+              <div class ="col-xs-4">
+                <%= link_to 'Log out', logout_path, method: :delete %>
+              </div>
+            <% end %>
+          </div>
+        </nav>
+      </div>
+    </header>
 
-  <%= yield %>
+    <%= yield %>
 
-  <footer>
-    <p>Created by Cameron Cabo</p>
-  </footer>
-</body>
+    <div class="row">
+      <footer>
+        <p>Created by Cameron Cabo</p>
+      </footer>
+    </div>
+  </body>
 </html>
