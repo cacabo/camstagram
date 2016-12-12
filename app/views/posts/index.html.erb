@@ -6,6 +6,15 @@
       <p>Welcome to Camstagram!</p>
     </div>
   </div>
+<% else %>
+  <div class="row">
+    <div class="col-xs-6 col-xs-push-3 new-post">
+      <p><%= link_to 'New Post', new_post_path %></p>
+      <a href = "/posts/new" >
+        <button type="button" class="btn btn-primary">New Post</button>
+      </a>
+    </div>
+  </div>
 <% end %>
 
 
@@ -45,12 +54,22 @@
               <%= post.caption %>
             </p>
           </div>
-          <% post.comments.take(3).each do |comment| %>
+          <% if post.comments.count > 2 then %>
+            <div class="row">
+              <p>...</p>
+            </div>
+          <% end %>
+          <% post.comments.take(2).each do |comment| %>
             <div class="row">
               <p>
                 <strong><%= link_to "#{comment.user.username}", comment.user%></strong>
                 &nbsp;<%= comment.body %>
               </p>
+            </div>
+          <% end %>
+          <% if logged_in? %>
+            <div class = "row">
+              <%= link_to 'Add a comment', "/posts/#{post.id}/comments/new" %>
             </div>
           <% end %>
         </div>
@@ -59,15 +78,5 @@
   </div>
 </div>
 
-<% end %>
-
-<br>
-
-<% if logged_in? %>
-  <div class="row">
-    <div class="col-xs-6 col-xs-push-3">
-      <%= link_to 'New Post', new_post_path %>
-    </div>
-  </div>
 <% end %>
 

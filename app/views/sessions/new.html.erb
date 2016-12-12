@@ -2,18 +2,33 @@
   <div class="col-xs-4 col-xs-push-4 form">
     <h1 id="log_in">Log In</h1>
 
-    <%= form_tag url: login_path do %>
-      <%= label_tag :username %><br>
-      <%= text_field_tag :username %>
+    <%= bootstrap_form_tag(url: login_path) do %>
+      <%= label_tag :username, "Username", class: "log-in-tag" %><br>
+      <%= text_field_tag :username, "", class: "log-in" %>
       <br>
-      <%= label_tag :password %><br>
-      <%= password_field_tag :password %>
+      <%= label_tag :password, "Password", class: "log-in-tag" %><br>
+      <%= password_field_tag :password, "", class: "log-in" %>
       <br>
-      <%= submit_tag 'Log in' %>
+      <div class="row">
+        <div class="col-xs-12 form-btn">
+          <%= submit_tag 'Log In' %>
+        </div>
+      </div>
     <% end %>
 
     <p>
       <%= link_to 'Back', posts_path %>
-      </p>
+    </p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 space">
+  </div>
+  <div class="col-xs-12 space">
+  </div>
+  <div class="col-xs-12 space">
+  </div>
+  <div class="col-xs-12 space">
   </div>
 </div>
