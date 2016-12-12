@@ -1,30 +1,73 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Posts</h1>
+<% if !logged_in? %>
+  <div class="row">
+    <div class="col-xs-8 col-xs-push-2 welcome">
+      <p>Welcome to Camstagram!</p>
+    </div>
+  </div>
+<% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Caption</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @recent_posts = @posts.limit(10) %>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.caption %></td>
-        <td><%= post.user.username %></td>
-        <td><%= link_to 'Show', post %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% recent_posts = Post.all.reverse.take(10) %>
+
+<% recent_posts.each do |post| %>
+
+<div class="container-fluid post-spacing">
+  <div class="row">
+    <div class="col-xs-6 col-xs-push-3 post">
+      <div class="post">
+        <div class="row post-head">
+          <div class="col-xs-1 thumb-img">
+            <%= image_tag post.user.profile_picture.url(:thumb), class: 'img-responsive img-circle' %>
+          </div>
+          <div class="col-xs-10 username">
+            <p>
+              <%= link_to "#{post.user.username}", post.user %>
+            </p>
+          </div>
+        </div>
+        <div class="row post-img">
+          <a href="#{post.image}">
+            <%= image_tag post.image.url(:large), class: 'img-responsive post-img' %>
+          </a>
+        </div>
+        <div class="row post-tasks">
+          <% if logged_in? && post.user == current_user %>
+            <%= link_to 'Edit', edit_post_path(post) %> |
+            <%= link_to 'Delete', "/posts/#{post.id}", method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </div>
+        <div class="post-discussion">
+          <div class="row">
+            <p>
+              <strong><%= link_to "#{post.user.username}", post.user%></strong>
+              <%= post.caption %>
+            </p>
+          </div>
+          <% post.comments.take(3).each do |comment| %>
+            <div class="row">
+              <p>
+                <strong><%= link_to "#{comment.user.username}", comment.user%></strong>
+                &nbsp;<%= comment.body %>
+              </p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% end %>
 
 <br>
 
 <% if logged_in? %>
-  <%= link_to 'New Post', new_post_path %>
+  <div class="row">
+    <div class="col-xs-6 col-xs-push-3">
+      <%= link_to 'New Post', new_post_path %>
+    </div>
+  </div>
 <% end %>
+

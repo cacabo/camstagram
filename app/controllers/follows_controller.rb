@@ -4,7 +4,7 @@ class FollowsController < ApplicationController
   def follow_user
     if current_user.follow @user.id
       respond_to do |format|
-        format.html { redirect_to root_path }
+        format.html { redirect_to @user }
         format.js
       end
     end
@@ -13,7 +13,7 @@ class FollowsController < ApplicationController
   def unfollow_user
     if current_user.unfollow @user.id
       respond_to do |format|
-        format.html { redirect_to root_path }
+        format.html { redirect_to @user }
         format.js
       end
     end

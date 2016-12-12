@@ -1,22 +1,25 @@
 <p id="notice"><%= notice %></p>
 
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-xs-2 col-xs-push-1">
+  <div class="row about">
+    <div class="col-xs-1 col-xs-push-3">
       <%= image_tag @user.profile_picture.url(:medium), class: 'img-responsive img-circle'%>
     </div>
-    <div class="col-xs-6 col-xs-push 2">
+    <div class="col-xs-6 col-xs-push-3">
       <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 about">
           <p>
             <strong>
-              <%= @user.name %>
+              <%= @user.username %><br>
             </strong>
-            <%= @user.bio %><br>
             <strong>Posts:</strong>
-            <%= @user.posts.count %><br>
-            <%= link_to "Followers: #{@user.followers.count}", "/users/#{@user.id}/followers" %><br>
-            <%= link_to "Following: #{@user.following.count}", "/users/#{@user.id}/following" %>
+            <%= @user.posts.count %>
+            <strong>&nbsp;&nbsp;&nbsp;&nbsp;Followers:</strong>
+            <%= link_to "#{@user.followers.count}", "/users/#{@user.id}/followers" %>
+            <strong>&nbsp;&nbsp;&nbsp;&nbsp;Following:</strong>
+            <%= link_to "#{@user.following.count}", "/users/#{@user.id}/following" %><br>
+            <strong><%= @user.name %></strong>
+            <%= @user.bio %>
           </p>
         </div>
       </div>
@@ -24,8 +27,8 @@
       <% if logged_in? %>
         <div class="row">
           <% if @user == current_user %>
-            <%= link_to 'New Post', '/posts/new' %>
-            <%= link_to 'Edit', edit_user_path(@user) %> |
+            <%= link_to 'New Post', '/posts/new' %> |
+            <%= link_to 'Edit Info', edit_user_path(@user) %> |
             <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
           <% elsif current_user_is_following(current_user.id, @user.id) %>
             <%= link_to 'Following', "/users/#{@user.id}/unfollow_user", method: :post %>
@@ -38,22 +41,22 @@
   </div>
 </div>
 
-
-<p>
-  <strong>Posts:</strong>
-</p>
-
-<table>
-  <tbody>
-    <% sorted_posts = @user.posts.reverse %>
-    <% sorted_posts.each do |post| %>
-      <tr>
-        <td><%= post.caption %></td>
-        <% if logged_in? && @user == current_user %>
-          <td><%= link_to 'Edit', "/posts/#{post.id}" %></td>
-          <td><%= link_to 'Destroy', "/posts/#{post.id}", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<div class="row">
+  <div class="col-xs-6 col-xs-push-3 post">
+    <table>
+      <tbody>
+        <% sorted_posts = @user.posts.reverse %>
+        <% sorted_posts.each do |post| %>
+          <tr>
+            <td><%= post.caption %></td>
+            <td><%= link_to 'Show', "/posts/#{post.id}" %></td>
+            <% if logged_in? && @user == current_user %>
+              <td><%= link_to 'Edit', "/posts/#{post.id}", method: :edit %></td>
+              <td><%= link_to 'Destroy', "/posts/#{post.id}", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+          </tr>
         <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      </tbody>
+    </table>
+  </div>
+</div>

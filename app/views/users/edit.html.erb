@@ -1,6 +1,10 @@
-<h1>Editing User</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<div class="row">
+  <div class="col-xs-4 col-xs-push-4 form">
+    <h1>Edit User Info</h1>
+    <%= render 'form' %>
+    <p>
+      <%= link_to "@#{user.username}", @user %> |
+      <%= link_to 'Back', users_path %>
+    </p>
+  </div>
+</div>

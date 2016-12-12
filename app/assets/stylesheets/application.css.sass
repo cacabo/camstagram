@@ -10,6 +10,7 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require rails_bootstrap_forms
  *= require_tree .
  *= require_self
  */
@@ -28,12 +29,12 @@ img
 html
   margin: 0
   padding: 0
-  font-size: 16px
 
 body
   background-color: #F0F0F0
   margin: 0
   padding: 0
+  font-size: 18px
 
 header
   background-color: #FFFFFF
@@ -53,6 +54,32 @@ footer p
   font-size: 24px
   line-height: 72px
 
+.back
+  padding-top: 5%
+
+.back p
+  font-size: 18px
+  text-align: center
+
+/*
+ * Formatting for header and footer
+ */
+
+header
+  margin-bottom: 2.5%
+
+footer
+  margin-top: 5%
+
+/*
+ * Formatting for index page
+ */
+
+.col-xs-8.col-xs-push-2.welcome p
+  font-size: 48
+  text-align: center
+  font-weight: bold
+
 /*
  * Formatting for post show page
  */
@@ -64,26 +91,56 @@ footer p
   padding: 12px
 
 .container-fluid.post-spacing
-  padding-top: 48px
+  margin-top: 48px
 
 div.row.post-head
-  background-color: #FFFFFF
   height: 64px
 
 .post
   background-color: white
   border-radius: 6px
 
+.row.post-tasks
+  padding: 12px
+  text-align: center
+
 .post-discussion
   padding: 12px
+
+.post-discussion p
+  font-size: 24px
 
 .col-xs-6.col-xs-push-3.post
   padding: 0
   margin: 0
 
-.col-xs-10.username
-  font-size: 24px
+.col-xs-10.username p
+  font-weight: bold
+  padding-top: 8px
+  font-size: 32px
 
 .img-responsive.img-circle
   height: 100%
   width: 100%
+
+/*
+ * Formatting for user show page
+ */
+
+.col-xs-12.about p
+  font-size: 24px
+  line-height: 150%
+
+.row .about
+  padding-top: 5%
+  padding-bottom: 5%
+
+
+.col-xs-4.col-xs-push-4.form h1
+  text-align: center
+  font-weight: bold
+  font-size: 36px
+
+.col-xs-4.col-xs-push-4.form p
+  text-align: center
+  font-size: 24px
