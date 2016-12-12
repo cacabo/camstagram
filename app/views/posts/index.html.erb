@@ -12,6 +12,7 @@
   </thead>
 
   <tbody>
+    <% @recent_posts = @posts.limit(10) %>
     <% @posts.each do |post| %>
       <tr>
         <td><%= post.caption %></td>

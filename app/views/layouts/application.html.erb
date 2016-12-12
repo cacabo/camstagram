@@ -6,44 +6,58 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
 </head>
+
   <body>
+
     <header>
-      <div class="row">
-        <div class="col-xs-4">
-          <a href = "/"><strong>Camstagram</strong></a>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-4">
+            <a href = "/"><h1 class="text-center"><strong>Camstagram</strong></h1></a>
+          </div>
+          <div class="col-xs-8">
+            <nav class="nav-banner">
+              <div class="col-xs-6">
+                <a class="nav-btn" href="/users"><h3 class="text-center">Users</h3></a>
+              </div>
+              <div class="col-xs-6">
+                <% if not logged_in? %>
+                  <div class ="col-xs-4 col-xs-push-4">
+                    <a class="nav-btn" href="/login"><h3 class="text-right">Log in</h3></a>
+                  </div>
+                  <div class ="col-xs-4 col-xs-push-4">
+                    <a class="nav-btn" href="/users/new"><h3>Sign up</h3></a>
+                  </div>
+                <% else %>
+                  <div class ="col-xs-4 col-xs-push-4">
+                    <h3 class="text-right">
+                      <%= link_to "@#{current_user.username}", current_user %>
+                    </h3>
+                  </div>
+                  <div class ="col-xs-4 col-xs-push-4">
+                    <h3>
+                      <%= link_to 'Log out', logout_path, method: :delete %>
+                    </h3>
+                  </div>
+                <% end %>
+              </div>
+            </nav>
+          </div>
         </div>
-        <div class="col-xs-8">
-        <nav class="nav-banner">
-          <div class="col-xs-6">
-            <a class="nav-btn" href="/users">Users</a>
-          </div>
-          <div class="col-xs-6">
-            <% if not logged_in? %>
-              <div class ="col-xs-4">
-                <a class="nav-btn" href="/login">Log in</a>
-              </div>
-              <div class ="col-xs-4">
-                <a class="nav-btn" href="/users/new">Sign up</a>
-              </div>
-            <% else %>
-              <div class ="col-xs-4">
-                <%= link_to "@#{current_user.username}", current_user %>
-              </div>
-              <div class ="col-xs-4">
-                <%= link_to 'Log out', logout_path, method: :delete %>
-              </div>
-            <% end %>
-          </div>
-        </nav>
       </div>
     </header>
 
     <%= yield %>
 
-    <div class="row">
-      <footer>
-        <p>Created by Cameron Cabo</p>
-      </footer>
-    </div>
+    <footer>
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+              <p class="text-center">Created by Cameron Cabo</p>
+            </div>
+        </div>
+      </div>
+    </footer>
+
   </body>
 </html>

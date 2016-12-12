@@ -30,6 +30,9 @@ gem 'pry', '~> 0.10.4'
 gem 'paperclip'
 gem 'aws-sdk'
 
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'autoprefixer-rails'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

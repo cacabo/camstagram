@@ -1,29 +1,42 @@
 <p id="notice"><%= notice %></p>
 
-<%= image_tag @user.profile_picture.url(:medium) %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-2 col-xs-push-1">
+      <%= image_tag @user.profile_picture.url(:medium), class: 'img-responsive img-circle'%>
+    </div>
+    <div class="col-xs-6 col-xs-push 2">
+      <div class="row">
+        <div class="col-xs-12">
+          <p>
+            <strong>
+              <%= @user.name %>
+            </strong>
+            <%= @user.bio %><br>
+            <strong>Posts:</strong>
+            <%= @user.posts.count %><br>
+            <%= link_to "Followers: #{@user.followers.count}", "/users/#{@user.id}/followers" %><br>
+            <%= link_to "Following: #{@user.following.count}", "/users/#{@user.id}/following" %>
+          </p>
+        </div>
+      </div>
 
-<p>
-  <strong>
-    <%= @user.name %>
-  </strong>
-  <%= @user.bio %><br>
-  <strong>Posts:</strong>
-  <%= @user.posts.count %><br>
-  <%= link_to "Followers: #{@user.followers.count}", "/users/#{@user.id}/followers" %><br>
-  <%= link_to "Following: #{@user.following.count}", "/users/#{@user.id}/following" %>
-</p>
-
-<% if logged_in? %>
-  <% if @user == current_user %>
-    <%= link_to 'New Post', '/posts/new' %>
-    <%= link_to 'Edit', edit_user_path(@user) %> |
-    <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
-  <% elsif current_user_is_following(current_user.id, @user.id) %>
-    <%= link_to 'Following', "/users/#{@user.id}/unfollow_user", method: :post %>
-  <% else %>
-    <%= link_to 'Follow', "/users/#{@user.id}/follow_user", method: :post %>
-  <% end %>
-<% end %>
+      <% if logged_in? %>
+        <div class="row">
+          <% if @user == current_user %>
+            <%= link_to 'New Post', '/posts/new' %>
+            <%= link_to 'Edit', edit_user_path(@user) %> |
+            <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% elsif current_user_is_following(current_user.id, @user.id) %>
+            <%= link_to 'Following', "/users/#{@user.id}/unfollow_user", method: :post %>
+          <% else %>
+            <%= link_to 'Follow', "/users/#{@user.id}/follow_user", method: :post %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
 
 
 <p>

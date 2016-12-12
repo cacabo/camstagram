@@ -14,99 +14,76 @@
  *= require_self
  */
 
+@import "bootstrap-sprockets"
+@import "bootstrap"
+
 /*
  * General formatting
  */
 
-body
-  background-color: #F8F8F8
-  font-size: 18px
+img
+  width: 100%
+  height: auto
 
-p
-  font-size: 18px
+html
+  margin: 0
+  padding: 0
+  font-size: 16px
+
+body
+  background-color: #F0F0F0
+  margin: 0
+  padding: 0
 
 header
-  height: 72px
-  line-height: 72px
-  font-size: 24px
   background-color: #FFFFFF
-  border: solid #C8C8C8
-  border-width: 0 0 2px 0
-  text-align: center
+  height: 72px
+  border: solid #989898
+  border-width: 0 0 1px 0
 
 footer
-  height: 36px
-  line-height: 36px
-  font-size: 24px
-  text-align: center
   background-color: #FFFFFF
+  height: 72px
 
-.row
-  width: 100%
+footer
+  border: solid #989898
+  border-width: 1px 0 0 0
 
-.col-xs-1
-  width: 8.333333%
-  float: left
-
-.col-xs-2
-  width: 16.666666%
-  float: left
-
-.col-xs-3
-  width: 25%
-  float: left
-
-.col-xs-4
-  width: 33.333333%
-  float: left
-
-.col-xs-5
-  width: 41.666666%
-  float: left
-
-.col-xs-6
-  width: 50%
-  float: left
-
-.col-xs-7
-  width: 58.333333%
-  float: left
-
-.col-xs-8
-  width: 66.666666%
-  float: left
-
-.col-xs-9
-  width: 75%
-  float: left
-
-.col-xs-10
-  width: 83.333333%
-  float: left
-
-.col-xs-11
-  width: 91.666666%
-  float: left
-
-.col-xs-12
-  width: 100%
+footer p
+  font-size: 24px
+  line-height: 72px
 
 /*
  * Formatting for post show page
  */
 
-.post
-  width: 100%
+.row
+  margin: 0
+
+.row.post-head
+  padding: 12px
+
+.container-fluid.post-spacing
+  padding-top: 48px
+
+div.row.post-head
   background-color: #FFFFFF
+  height: 64px
 
-.post-head
-  line-height: 32px
-
-.thumb-img
-  border-radius: 100%
-
-.post-im
-  width: 100%
+.post
+  background-color: white
+  border-radius: 6px
 
 .post-discussion
-  padding: 6px
+  padding: 12px
+
+.col-xs-6.col-xs-push-3.post
+  padding: 0
+  margin: 0
+
+.col-xs-10.username
+  font-size: 24px
+
+.img-responsive.img-circle
+  height: 100%
+  width: 100%
