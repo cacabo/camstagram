@@ -66,7 +66,7 @@
               <strong>likes</strong>
             <% end %>
             <% if logged_in? %>
-              <% if current_user.likes.find_by(post.id).nil? %>
+              <% if current_user.likes.find_by(post_id: post.id).nil? %>
                 | <%= link_to 'Like Post', "/posts/#{post.id}/like_post", method: :post %>
               <% else %>
                 | <%= link_to 'Unlike Post', "/posts/#{post.id}/unlike_post", method: :post %> 
