@@ -53,17 +53,19 @@
               </p>
             </div>
           </div>
-          <div class="row post-img">
-            <a href="#{post.image}">
-              <%= image_tag post.image.url(:large), class: 'img-responsive post-img' %>
-            </a>
-          </div>
+          <a href=<%= "/posts/#{post.id}" %>>
+            <div class="row post-img">
+              <a href="#{post.image}">
+                <%= image_tag post.image.url(:large), class: 'img-responsive post-img' %>
+              </a>
+            </div>
+          </a>
           <div class="row post-tasks">
-            <%= post.likes.count %> 
+            <strong><%= post.likes.count %></strong>
             <% if post.likes.count == 1 %>
-              like
+              <strong>like</strong>
             <% else %>
-              likes
+              <strong>likes</strong>
             <% end %>
             <% if logged_in? %>
               <% if current_user.likes.find_by(post.id).nil? %>
@@ -73,8 +75,8 @@
               <% end %>
             <% end %>
             <% if logged_in? && post.user == current_user %>
-              <%= link_to 'Edit', edit_post_path(post) %> |
-              <%= link_to 'Delete', "/posts/#{post.id}", method: :delete, data: { confirm: 'Are you sure?' } %>
+              | <%= link_to 'Edit', edit_post_path(post) %>
+              | <%= link_to 'Delete', "/posts/#{post.id}", method: :delete, data: { confirm: 'Are you sure?' } %>
             <% end %>
           </div>
           <div class="post-discussion">
@@ -86,12 +88,12 @@
                 <% end %>
               </p>
             </div>
-            <% if post.comments.count > 2 then %>
+            <% if post.comments.count > 3 then %>
               <div class="row">
                 <p>...</p>
               </div>
             <% end %>
-            <% post.comments.take(2).each do |comment| %>
+            <% post.comments.last(3).each do |comment| %>
               <div class="row">
                 <p>
                   <strong><%= link_to "#{comment.user.username}", comment.user%></strong>

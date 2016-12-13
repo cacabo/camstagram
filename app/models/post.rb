@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  validates :caption, length: { maximum: 60 }
+  validates :caption, length: { maximum: 100 }
 
   belongs_to :user
   has_many :comments, dependent: :destroy

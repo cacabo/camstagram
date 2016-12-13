@@ -3,9 +3,14 @@ require 'bcrypt'
 class User < ActiveRecord::Base
   validates :name, presence: true
   validates :name, length: { minimum: 1 }
+  validates :name, length: { maximum: 25 }
   validates :username, presence: true
   validates :username, uniqueness: true
-  validates :username, length: { minimum: 2 }
+  validates :username, format: { without: /\s/, message: "username cannot contain whitespace" }
+  validates :username, format: { without: /[A-Z]/, message: "username cannot contain capitalized letters" }
+  validates :username, length: { minimum: 1 }
+  validates :username, length: { maximum: 20 }
+  validates :bio, length: { maximum: 100 }
 
   has_many :follower_relationships, foreign_key: :following_id, class_name: 'Follow', dependent: :destroy
   has_many :followers, through: :follower_relationships, source: :follower
@@ -51,5 +56,4 @@ class User < ActiveRecord::Base
     @password = Password.create(new_password)
     self.password_hash = @password
   end
-
 end
