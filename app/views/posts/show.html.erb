@@ -60,8 +60,35 @@
           <% end %>
 
           <% if logged_in? %>
-            <div class = "row">
-              <%= link_to 'Add a comment', "/posts/#{@post.id}/comments/new" %>
+
+            <div class="row">
+              <div class="col-xs-12">
+                
+                <% @comment = Comment.new %>
+                <% @comment.post_id = params[:post_id] %>
+
+                <%= bootstrap_form_for([@post, @comment]) do |f| %>
+                  <% if @comment.errors.any? %>
+                    <div id="error_explanation">
+                      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+                      <ul>
+                      <% @comment.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                      <% end %>
+                      </ul>
+                    </div>
+                  <% end %>
+
+                  <div class="field">
+                    <%= f.text_field :body, placeholder: "Add a comment..." %>
+                  </div>
+                  <div class="actions">
+                    <%= f.submit %>
+                  </div>
+                <% end %>
+
+              </div>
             </div>
           <% end %>
         </div>

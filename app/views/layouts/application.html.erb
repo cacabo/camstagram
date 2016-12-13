@@ -23,10 +23,10 @@
               <div class="col-xs-6">
                 <% if not logged_in? %>
                   <div class ="col-xs-4 col-xs-push-4">
-                    <a class="nav-btn" href="/login"><h3 class="text-right">Log in</h3></a>
+                    <a href="/login"><h3>Log in</h3></a>
                   </div>
                   <div class ="col-xs-4 col-xs-push-4">
-                    <a class="nav-btn" href="/users/new"><h3>Sign up</h3></a>
+                    <a href="/users/new"><h3>Sign up</h3></a>
                   </div>
                 <% else %>
                   <div class ="col-xs-4">
@@ -54,15 +54,10 @@
 
     <%= yield %>
 
-    <footer>
-      <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-12">
-              <p class="text-center">Created by Cameron Cabo</p>
-            </div>
-        </div>
+    <div class="row footer">
+      <div class="col-xs-12">
+        <p class="text-center">Created by Cameron Cabo</p>
       </div>
-    </footer>
-
+    </div>
   </body>
 </html>

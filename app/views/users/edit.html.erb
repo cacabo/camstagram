@@ -3,7 +3,7 @@
     <h1>Edit User Info</h1>
     <%= render 'form' %>
     <p>
-      <%= link_to "@#{user.username}", @user %> |
+      <%= link_to "@#{current_user.username}", @user %> |
       <%= link_to 'Back', users_path %>
     </p>
   </div>

@@ -64,7 +64,7 @@
           <% sorted_posts = @user.posts.reverse %>
           <% sorted_posts.each do |post| %>
             <div class="col-xs-4 grid-post">
-              <a href="post"
+              <a href="post">
                 <%= image_tag post.image.url(:medium), class: 'img-responsive post-img' %>
               </a>
             </div>
