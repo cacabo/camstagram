@@ -5,11 +5,12 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     if !logged_in?
-      @posts = Post.all.order('created_at DESC')
+      @posts = Post.all.order('created_at DESC').take(10)
     else
       @posts = Post.posts_of_followings(current_user.following)
-      @posts = @posts + current_user.posts
-      @posts = @posts.sort_by { |obj| obj.created_at }.reverse
+      @posts = @posts.concat(current_user.posts)
+      @posts = @posts.sort_by(&:'created_at')
+      @posts = @posts.reverse.take(10)
     end
   end
 

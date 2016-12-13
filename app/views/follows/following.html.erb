@@ -1,22 +1,36 @@
-<h1>Following</h1>
+<div class="row">
+  <div class="col-xs-4 col-xs-push-4 post">
+    <h1>Listing @<%= @user.username %>'s Following</h1>
+    <div class="row list_wrapper">
+      <% @followings.each do |user| %>
+        <a href= <%="/users/#{user.id}"%>>
+          <div class="row list-head">
+            <div class="col-xs-2 thumb-img list">
+              <%= image_tag user.profile_picture.url(:thumb), class: 'img-responsive img-circle' %>
+            </div>
+            <div class="col-xs-10 user-info">
+              <h3>
+                <strong> <%= user.username %> </strong><br>
+                <small><strong> <%= user.name %> </strong> <%= user.bio %></small>
+              </h3>
+            </div>
+          </div>
+        </a>
+      <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Name</th>
-      <th>Bio</th>
-    </tr>
-  </thead>
+      <div class="row">
+        <div class="col-xs-12 link">
+          <a href= <%= "/users/#{@user.id}" %>><h3><%= "@#{@user.username}" %></h3></a>
+        </div>
+      </div>
 
-  <tbody>
-    <% @followings.each do |following| %>
-      <tr>
-        <td><%= following.username %></td>
-        <td><%= following.name %></td>
-        <td><%= following.bio %></td>
-        <td><%= link_to 'Show', following %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 space">
+  </div>
+  <div class="col-xs-12 space">
+  </div>
+</div>

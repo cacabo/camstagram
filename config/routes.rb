@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
+  get 'likes/like_post'
+
+  get 'likes/unlike_post'
+
   post '/users/:id/follow_user' => 'follows#follow_user'
   post '/users/:id/unfollow_user' => 'follows#unfollow_user'
   get '/users/:id/followers' => 'follows#followers'
   get '/users/:id/following' => 'follows#following'
+
+  post '/posts/:id/like_post' => 'likes#like_post'
+  post '/posts/:id/unlike_post' => 'likes#unlike_post'
 
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'

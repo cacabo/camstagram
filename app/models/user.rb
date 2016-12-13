@@ -7,9 +7,6 @@ class User < ActiveRecord::Base
   validates :username, uniqueness: true
   validates :username, length: { minimum: 2 }
 
-  #has_many :followers, class_name: 'Following', foreign_key: 'user_id', dependent: :destroy
-  #has_many :following, class_name: 'Following', foreign_key: 'follower_id', dependent: :destroy
-
   has_many :follower_relationships, foreign_key: :following_id, class_name: 'Follow', dependent: :destroy
   has_many :followers, through: :follower_relationships, source: :follower
 
@@ -19,6 +16,7 @@ class User < ActiveRecord::Base
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
 
   has_attached_file :profile_picture, styles: {
     thumb: '50x50#',
@@ -37,6 +35,14 @@ class User < ActiveRecord::Base
     following_relationships.find_by(following_id: user_id).destroy
   end
 
+  def like_post(post_id)
+    likes.create(post_id: post_id)
+  end
+
+  def unlike_post(post_id)
+    likes.find_by(post_id: post_id).destroy
+  end
+
   def password
     @password ||= Password.new(password_hash) unless password_hash.nil?
   end
@@ -45,4 +51,5 @@ class User < ActiveRecord::Base
     @password = Password.create(new_password)
     self.password_hash = @password
   end
+
 end

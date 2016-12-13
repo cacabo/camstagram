@@ -22,6 +22,9 @@
  * General formatting
  */
 
+a:hover
+  background-color: none
+
 img
   width: 100%
   height: auto
@@ -76,6 +79,15 @@ footer p
   text-align: center
   font-weight: bold
 
+.col-xs-6.col-xs-push-3.welcome
+  text-align: center
+
+.col-xs-6.col-xs-push-3.welcome a
+  color: #428bca
+
+.col-xs-6.col-xs-push-3.welcome a:hover
+  background-color: none
+
 /*
  * Formatting for post show page
  */
@@ -129,6 +141,10 @@ div.row.post-head
   font-size: 24px
   line-height: 150%
 
+.col-xs-12.about a
+  color: #303030
+  background-color: none
+
 .row.about
   padding-bottom: 5%
   margin-top: 2.5%
@@ -159,6 +175,7 @@ div.row.post-head
 
 .col-xs-12.no-posts
   padding: 12px
+  text-align: center
 
 .col-xs-12.no-posts
   text-align: center
@@ -167,3 +184,35 @@ div.row.post-head
 .new-post p
   text-align: center
   font-size: 24px
+
+/*
+ * Formatting for listing users
+ */
+
+.grid-post
+  margin-bottom: 16px
+  margin-top: 16px
+
+.col-xs-10.user-info
+  color: #555
+  text-decoration: none
+
+.col-xs-2.thumb-img.list
+  padding-top: 2.5%
+  padding-bottom: 2.5%
+
+.row.list-head
+  padding: 12px
+  border: solid #E0E0E0
+  border-width: 0 0 2px 0
+
+.row.list-head:hover
+  background-color: #F0F0F0
+  border-width: 2px
+
+.col-xs-4.col-xs-push-4.post h1
+  text-align: center
+
+.col-xs-12.link h3
+  text-align: center
+  text-decoration: none

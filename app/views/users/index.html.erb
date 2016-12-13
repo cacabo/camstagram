@@ -1,37 +1,38 @@
 <p id="notice"><%= notice %></p>
 
 <div class="row">
-  <div class="col-xs-4 col-xs-push-4">
+  <div class="col-xs-4 col-xs-push-4 post">
     <h1>Listing Users</h1>
+    <div class="row list_wrapper">
+      <% @users.each do |user| %>
+        <a href= <%="/users/#{user.id}"%>>
+          <div class="row list-head">
+            <div class="col-xs-2 thumb-img list">
+              <%= image_tag user.profile_picture.url(:thumb), class: 'img-responsive img-circle' %>
+            </div>
+            <div class="col-xs-10 user-info">
+              <h3>
+                <strong> <%= user.username %> </strong><br>
+                <small><strong> <%= user.name %> </strong> <%= user.bio %></small>
+              </h3>
+            </div>
+          </div>
+        </a>
+      <% end %>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Username</th>
-          <th>Name</th>
-          <th>Bio</th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
+      <div class="row">
+        <div class="col-xs-12 link">
+          <a href="/posts"><h3>Return to Home</h3></a>
+        </div>
+      </div>
 
-      <tbody>
-        <% @users.each do |user| %>
-          <tr>
-            <td><%= user.username %></td>
-            <td><%= user.name %></td>
-            <td><%= user.bio %></td>
-            <td><%= link_to 'Show', user %></td>
-            <% if logged_in? && current_user == user %>
-              <td><%= link_to 'Edit', edit_user_path(user) %></td>
-              <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-              <% end %>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    </div>
+  </div>
+</div>
 
-    <br>
-
-    <%= link_to 'New User', new_user_path %>
+<div class="row">
+  <div class="col-xs-12 space">
+  </div>
+  <div class="col-xs-12 space">
   </div>
 </div>

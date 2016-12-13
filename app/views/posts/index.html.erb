@@ -6,77 +6,95 @@
       <p>Welcome to Camstagram!</p>
     </div>
   </div>
-<% else %>
-  <div class="row">
-    <div class="col-xs-6 col-xs-push-3 new-post">
-      <p><%= link_to 'New Post', new_post_path %></p>
-      <a href = "/posts/new" >
-        <button type="button" class="btn btn-primary">New Post</button>
-      </a>
-    </div>
-  </div>
 <% end %>
 
-
-<% recent_posts = Post.all.reverse.take(10) %>
-
-<% recent_posts.each do |post| %>
-
-<div class="container-fluid post-spacing">
+<% if logged_in? && @posts.count.zero? %>
   <div class="row">
-    <div class="col-xs-6 col-xs-push-3 post">
-      <div class="post">
-        <div class="row post-head">
-          <div class="col-xs-1 thumb-img">
-            <%= image_tag post.user.profile_picture.url(:thumb), class: 'img-responsive img-circle' %>
-          </div>
-          <div class="col-xs-10 username">
-            <p>
-              <%= link_to "#{post.user.username}", post.user %>
-            </p>
-          </div>
-        </div>
-        <div class="row post-img">
-          <a href="#{post.image}">
-            <%= image_tag post.image.url(:large), class: 'img-responsive post-img' %>
-          </a>
-        </div>
-        <div class="row post-tasks">
-          <% if logged_in? && post.user == current_user %>
-            <%= link_to 'Edit', edit_post_path(post) %> |
-            <%= link_to 'Delete', "/posts/#{post.id}", method: :delete, data: { confirm: 'Are you sure?' } %>
-          <% end %>
-        </div>
-        <div class="post-discussion">
-          <div class="row">
-            <p>
-              <strong><%= link_to "#{post.user.username}", post.user%></strong>
-              <%= post.caption %>
-            </p>
-          </div>
-          <% if post.comments.count > 2 then %>
-            <div class="row">
-              <p>...</p>
+    <div class="col-xs-12 space">
+    </div>
+    <div class="col-xs-12 space">
+    </div>
+
+    <div class="col-xs-6 col-xs-push-3 welcome">
+      <h1>
+        Hi <a href= <%="/users/#{current_user.id}"%>> @<%=current_user.username%></a>! Follow some <a href="/users">users</a>
+        or make some <a href="/posts/new">posts of your own</a> to populate your feed.
+      </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 space">
+    </div>
+    <div class="col-xs-12 space">
+    </div>
+    <div class="col-xs-12 space">
+    </div>
+    <div class="col-xs-12 space">
+    </div>
+    <div class="col-xs-12 space">
+    </div>
+  </div>
+
+<% else %>
+
+  <% @posts.each do |post| %>
+
+  <div class="container-fluid post-spacing">
+    <div class="row">
+      <div class="col-xs-6 col-xs-push-3 post">
+        <div class="post">
+          <div class="row post-head">
+            <div class="col-xs-1 thumb-img">
+              <%= image_tag post.user.profile_picture.url(:thumb), class: 'img-responsive img-circle' %>
             </div>
-          <% end %>
-          <% post.comments.take(2).each do |comment| %>
-            <div class="row">
+            <div class="col-xs-10 username">
               <p>
-                <strong><%= link_to "#{comment.user.username}", comment.user%></strong>
-                &nbsp;<%= comment.body %>
+                <%= link_to "#{post.user.username}", post.user %>
               </p>
             </div>
-          <% end %>
-          <% if logged_in? %>
-            <div class = "row">
-              <%= link_to 'Add a comment', "/posts/#{post.id}/comments/new" %>
+          </div>
+          <div class="row post-img">
+            <a href="#{post.image}">
+              <%= image_tag post.image.url(:large), class: 'img-responsive post-img' %>
+            </a>
+          </div>
+          <div class="row post-tasks">
+            <% if logged_in? && post.user == current_user %>
+              <%= link_to 'Edit', edit_post_path(post) %> |
+              <%= link_to 'Delete', "/posts/#{post.id}", method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+          </div>
+          <div class="post-discussion">
+            <div class="row">
+              <p>
+                <strong><%= link_to "#{post.user.username}", post.user%></strong>
+                <%= post.caption %>
+              </p>
             </div>
-          <% end %>
+            <% if post.comments.count > 2 then %>
+              <div class="row">
+                <p>...</p>
+              </div>
+            <% end %>
+            <% post.comments.take(2).each do |comment| %>
+              <div class="row">
+                <p>
+                  <strong><%= link_to "#{comment.user.username}", comment.user%></strong>
+                  &nbsp;<%= comment.body %>
+                </p>
+              </div>
+            <% end %>
+            <% if logged_in? %>
+              <div class = "row">
+                <%= link_to 'Add a comment', "/posts/#{post.id}/comments/new" %>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+
+  <% end %>
 
 <% end %>
-
