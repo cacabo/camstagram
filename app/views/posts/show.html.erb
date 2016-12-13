@@ -29,7 +29,7 @@
           <% if @post.likes.count == 1 %>
             <strong>like</strong>
           <% else %>
-            likes
+            <strong>likes</strong>
           <% end %>
           <% if logged_in? %>
             <% if current_user.likes.find_by(@post.id).nil? %>
@@ -57,6 +57,9 @@
               <p>
                 <strong><%= link_to "#{comment.user.username}", comment.user%></strong>
                 &nbsp;<%= comment.body %>
+                <% if current_user == comment.user %>
+                  <%= link_to 'Delete Comment', "/posts/#{@post.id}/comments/#{comment.id}", method: :delete %>
+                <% end %>
               </p>
             </div>
           <% end %>
