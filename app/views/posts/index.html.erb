@@ -55,9 +55,7 @@
           </div>
           <a href=<%= "/posts/#{post.id}" %>>
             <div class="row post-img">
-              <a href="#{post.image}">
-                <%= image_tag post.image.url(:large), class: 'img-responsive post-img' %>
-              </a>
+              <%= image_tag post.image.url(:large), class: 'img-responsive post-img' %>
             </div>
           </a>
           <div class="row post-tasks">
