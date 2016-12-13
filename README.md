@@ -1,11 +1,10 @@
 # camstagram
-:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=
                                    CAMSTAGRAM
                             Final Project for CIS 196:
                                  RoR Development
                                  By: Cameron Cabo
                                   PennKey: ccabo
-:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=
+
 Heroku: camstagram.herokuapp.com
 
 Overview:
