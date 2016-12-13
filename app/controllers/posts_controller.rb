@@ -4,6 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    reset_session
     if !logged_in?
       @posts = Post.all.order('created_at DESC').take(10)
     else
