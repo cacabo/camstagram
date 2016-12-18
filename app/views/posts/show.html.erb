@@ -57,7 +57,7 @@
               <p>
                 <strong><%= link_to "#{comment.user.username}", comment.user%></strong>
                 &nbsp;<%= comment.body %>
-                <% if current_user == comment.user || current_user == @post.user %>
+                <% if logged_in? && current_user == comment.user || current_user == @post.user %>
                   <%= link_to 'Delete Comment', "/posts/#{@post.id}/comments/#{comment.id}", method: :delete %>
                 <% end %>
               </p>
